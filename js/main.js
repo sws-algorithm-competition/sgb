@@ -32,7 +32,7 @@ var Board = function(container, status) {
     self._set(d[0], d[1], R.com);
     self.lock = false;
     var time = (new Date() - self.time)
-    self.setStatus("轩轩用时"+(time/1000)+"秒, 评分 " + d.score + ', 搜索深度 ' + d.step);
+    self.setStatus("电脑用时"+(time/1000)+"秒, 评分 " + d.score + ', 搜索深度 ' + d.step);
     self.talk(d, time, d.step)
   }
   this.setStatus("请点击开始按钮");
@@ -63,7 +63,7 @@ Board.prototype.start = function() {
     title: "请选择选手",
     buttons: [
       {
-        text: "轩轩先手",
+        text: "电脑先手",
         onClick: function(){
           self.worker.postMessage({
             type: "BEGIN"
@@ -129,7 +129,7 @@ Board.prototype._set = function(x, y, role) {
   var winner = W(this.board);
   var self = this;
   if(winner == R.com) {
-    $.alert("轩轩赢了！", function() {
+    $.alert("电脑赢了！", function() {
       self.stop();
     });
   } else if (winner == R.hum) {
@@ -155,7 +155,7 @@ Board.prototype.com = function(x, y, role) {
     x: x,
     y: y
   });
-  this.setStatus("轩轩正在思考...");
+  this.setStatus("电脑正在思考...");
 }
 
 Board.prototype.setStatus = function(s) {
@@ -164,7 +164,7 @@ Board.prototype.setStatus = function(s) {
 
 Board.prototype.back = function(step) {
   if(this.lock) {
-    this.setStatus("轩轩正在思考，请稍等..");
+    this.setStatus("电脑正在思考，请稍等..");
     return;
   }
   step = step || 1;
